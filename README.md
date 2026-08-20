@@ -4,12 +4,13 @@
 
 <p align="center">
 
-**Predict house prices using Machine Learning + Flask + HTML**
+<b>Predict house prices using Machine Learning + Flask + HTML</b>
 
-<br>
+<br><br>
 
-[🌐 Live Demo](YOUR_RENDER_LINK_HERE) •
-[💻 GitHub Repository](YOUR_GITHUB_REPOSITORY_URL)
+<a href="https://mlr-house-price-prediction-5.onrender.com">
+  🌐 <b>Live Demo</b>
+</a>
 
 </p>
 
@@ -37,6 +38,23 @@ The complete application is deployed online using **Render**.
 * Flask integration
 * Web-based prediction
 * Cloud deployment
+
+---
+
+# 🌐 Live Demo
+
+<p align="center">
+
+<a href="https://mlr-house-price-prediction-5.onrender.com">
+
+## 🚀 Open House Price Prediction App
+
+</a>
+
+</p>
+
+🔗 **Live Application:**
+https://mlr-house-price-prediction-5.onrender.com
 
 ---
 
@@ -103,7 +121,8 @@ The complete application is deployed online using **Render**.
 | 🔢 NumPy        | Numerical Operations  |
 | 🤖 Scikit-learn | Machine Learning      |
 | 🌐 Flask        | Backend Web Framework |
-| 🎨 HTML / CSS   | Frontend              |
+| 🎨 HTML         | Frontend              |
+| 🎨 CSS          | Styling               |
 | 💾 Pickle       | Model Serialization   |
 | 📊 Matplotlib   | Visualization         |
 | 🔧 Git          | Version Control       |
@@ -144,7 +163,7 @@ Before training the model, the dataset is converted into a format suitable for M
 
 Categorical city values are converted into numerical values.
 
-```python
+```text
 City A → 0
 City B → 1
 City C → 2
@@ -162,7 +181,7 @@ df["City"] = df["City"].map(city_mapping)
 
 Country values are also converted into numerical representations.
 
-```python
+```text
 Country A → 0
 Country B → 1
 Country C → 2
@@ -194,23 +213,23 @@ Original Date
 └─────────────┘
 ```
 
-This allows the Machine Learning model to work with date-related information numerically.
+The date information is converted into numerical values so that it can be used by the Machine Learning model.
 
 ---
 
 # 🎯 Features and Target
 
-The dataset is divided into:
+The dataset is divided into independent and dependent variables.
 
-### X — Independent Variables
+## X — Independent Variables
 
 ```python
 X = df.iloc[:, :-1]
 ```
 
-`X` contains the input features used for prediction.
+`X` contains the input features used by the model.
 
-### y — Dependent Variable
+## y — Dependent Variable
 
 ```python
 y = df.iloc[:, -1]
@@ -220,6 +239,7 @@ y = df.iloc[:, -1]
 
 ```text
 X → Input Features
+
 y → House Price
 ```
 
@@ -227,7 +247,7 @@ y → House Price
 
 # ✂️ Train-Test Split
 
-The dataset is divided into training and testing sets.
+The dataset is divided into training and testing data.
 
 ```python
 from sklearn.model_selection import train_test_split
@@ -253,6 +273,8 @@ X_train, X_test, y_train, y_test = train_test_split(
       Train Model         Evaluate Model
 ```
 
+The training data is used to train the model, while the testing data is used to evaluate its performance.
+
 ---
 
 # 🤖 Model Training
@@ -267,19 +289,25 @@ reg = LinearRegression()
 reg.fit(X_train, y_train)
 ```
 
-### Regression Coefficients
+---
+
+## 📐 Regression Coefficients
 
 ```python
 reg.coef_
 ```
 
-The coefficients represent the effect of each feature on the predicted house price.
+The coefficients represent the relationship between the input features and the predicted house price.
 
-### Intercept
+---
+
+## 📍 Intercept
 
 ```python
 reg.intercept_
 ```
+
+The intercept represents the constant value in the regression equation.
 
 ---
 
@@ -297,17 +325,15 @@ train_prediction = reg.predict(X_train)
 test_prediction = reg.predict(X_test)
 ```
 
-The predictions are compared with the actual house prices to evaluate model performance.
+The predicted values are compared with the actual values to evaluate the model.
 
 ---
 
-# 📉 Model Evaluation
+# 📉 RMSE — Root Mean Square Error
 
-Two important regression metrics are used:
+RMSE measures the difference between actual and predicted values.
 
-### 1️⃣ RMSE
-
-**Root Mean Square Error** measures the average magnitude of prediction errors.
+### Formula
 
 ```text
 RMSE = √[ Σ(yi - ŷi)² / n ]
@@ -317,7 +343,9 @@ Where:
 
 ```text
 yi  → Actual value
+
 ŷi  → Predicted value
+
 n   → Number of observations
 ```
 
@@ -325,23 +353,25 @@ n   → Number of observations
 
 ```text
 Lower RMSE
-    ↓
-Smaller Prediction Error
-    ↓
-Better Model Performance
+     ↓
+Lower Prediction Error
+     ↓
+Better Prediction Performance
 ```
 
 ---
 
 # 📊 R² Score
 
-R² measures how well the model explains the variation in the target variable.
+R² Score measures how well the model explains the variation in the target variable.
+
+### Formula
 
 ```text
 R² = 1 - [ Σ(yi - ŷi)² / Σ(yi - ȳ)² ]
 ```
 
-Python:
+### Python Implementation
 
 ```python
 from sklearn.metrics import r2_score
@@ -354,14 +384,12 @@ r2 = r2_score(y_test, test_prediction)
 ```text
 R² close to 1
       ↓
-Better model fit
+Better Model Fit
 ```
 
 ---
 
 # 📋 Performance Metrics
-
-The project evaluates the model using:
 
 | Metric        | Purpose                            |
 | ------------- | ---------------------------------- |
@@ -374,9 +402,9 @@ The project evaluates the model using:
 
 ---
 
-# 💾 Saving the Model
+# 💾 Model Saving
 
-The trained model is saved using Python's Pickle module.
+The trained Machine Learning model is saved using Python's Pickle module.
 
 ```python
 import pickle
@@ -389,7 +417,7 @@ This allows the trained model to be reused without training it again.
 
 ---
 
-# 📂 Loading the Model
+# 📂 Model Loading
 
 The saved model can be loaded inside the Flask application.
 
@@ -404,14 +432,14 @@ with open("MLR.pkl", "rb") as file:
 
 Users can enter their own house information through the web application.
 
-The process is:
+The prediction process is:
 
 ```text
 User Input
     ↓
 HTML Form
     ↓
-Flask
+Flask Backend
     ↓
 Loaded ML Model
     ↓
@@ -430,7 +458,7 @@ prediction = model.predict(test_data)
 
 # 🌐 Flask Web Application
 
-Flask acts as the bridge between the frontend and Machine Learning model.
+Flask connects the HTML frontend with the Machine Learning model.
 
 ```text
 ┌──────────────────┐
@@ -438,15 +466,16 @@ Flask acts as the bridge between the frontend and Machine Learning model.
 └────────┬─────────┘
          ↓
 ┌──────────────────┐
-│   HTML + CSS     │
+│    HTML + CSS    │
 └────────┬─────────┘
          ↓
 ┌──────────────────┐
-│ Flask Backend    │
+│   Flask Backend  │
 └────────┬─────────┘
          ↓
 ┌──────────────────┐
-│ MLR.pkl Model    │
+│    MLR.pkl       │
+│   ML Model       │
 └────────┬─────────┘
          ↓
 ┌──────────────────┐
@@ -454,7 +483,7 @@ Flask acts as the bridge between the frontend and Machine Learning model.
 └────────┬─────────┘
          ↓
 ┌──────────────────┐
-│ Display Result   │
+│  Display Result  │
 └──────────────────┘
 ```
 
@@ -480,25 +509,31 @@ MLR-M-1/
 
 # 💻 Run the Project Locally
 
-## 1. Clone Repository
+## 1️⃣ Clone Repository
 
 ```bash
 git clone YOUR_GITHUB_REPOSITORY_URL
 ```
 
-## 2. Open Project Directory
+---
+
+## 2️⃣ Open Project Directory
 
 ```bash
 cd MLR-M-1
 ```
 
-## 3. Create Virtual Environment
+---
+
+## 3️⃣ Create Virtual Environment
 
 ```bash
 python -m venv .venv
 ```
 
-## 4. Activate Environment
+---
+
+## 4️⃣ Activate Virtual Environment
 
 ### Windows
 
@@ -506,19 +541,25 @@ python -m venv .venv
 .venv\Scripts\activate
 ```
 
-## 5. Install Dependencies
+---
+
+## 5️⃣ Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 6. Start Flask Application
+---
+
+## 6️⃣ Start Flask Application
 
 ```bash
 python app.py
 ```
 
-## 7. Open in Browser
+---
+
+## 7️⃣ Open in Browser
 
 ```text
 http://127.0.0.1:5000
@@ -526,9 +567,17 @@ http://127.0.0.1:5000
 
 ---
 
-# ☁️ Deployment
+# ☁️ Render Deployment
 
 The application is deployed using **Render**.
+
+### 🚀 Live Application
+
+<a href="https://mlr-house-price-prediction-5.onrender.com">
+
+**👉 Open House Price Prediction Application**
+
+</a>
 
 ### Production Start Command
 
@@ -536,9 +585,23 @@ The application is deployed using **Render**.
 gunicorn app:app
 ```
 
-### Live Application
+### Deployment Flow
 
-🚀 **[Open Live Application](YOUR_RENDER_LINK_HERE)**
+```text
+GitHub Repository
+       ↓
+     Render
+       ↓
+Build Application
+       ↓
+Install Requirements
+       ↓
+Start Gunicorn
+       ↓
+Flask Application
+       ↓
+Live Website
+```
 
 ---
 
@@ -593,25 +656,27 @@ gunicorn
 
 # 🔮 Future Improvements
 
-Some possible improvements for the project:
+Possible improvements for this project include:
 
-* Add more Machine Learning algorithms
-* Compare Linear Regression with Random Forest and Decision Tree
-* Add data visualization dashboards
-* Improve categorical encoding using One-Hot Encoding
-* Add input validation
-* Improve prediction accuracy
-* Add responsive UI
-* Add model performance charts
-* Add database integration
+* 🌳 Add Random Forest Regression
+* 🌲 Add Decision Tree Regression
+* 📊 Add data visualization dashboards
+* 🔢 Improve categorical encoding
+* 🛡️ Add input validation
+* 🎯 Improve prediction accuracy
+* 📱 Create a responsive UI
+* 📈 Add model performance graphs
+* 🗄️ Add database integration
+* 🔐 Add user authentication
 
 ---
 
 # 👨‍💻 Author
 
-### **Your Name**
+### Your Name
 
-💻 GitHub: **[Your GitHub Profile](YOUR_GITHUB_PROFILE_URL)**
+💻 **GitHub:**
+[Your GitHub Profile](YOUR_GITHUB_PROFILE_URL)
 
 ---
 
@@ -619,20 +684,28 @@ Some possible improvements for the project:
 
 If you found this project useful:
 
-### ⭐ Star the repository on GitHub
+⭐ **Star the repository**
 
-### 🍴 Fork the project
+🍴 **Fork the project**
 
-### 📢 Share it with others
+📢 **Share the project**
 
 ---
 
 <p align="center">
 
-### 🏠 House Price Prediction
+## 🏠 House Price Prediction
 
-**Machine Learning • Flask • Multiple Linear Regression • Render**
+**Machine Learning • Multiple Linear Regression • Flask • Render**
 
 Made with ❤️ using Python
+
+<br><br>
+
+<a href="https://mlr-house-price-prediction-5.onrender.com">
+
+🚀 <b>Try the Live Application</b>
+
+</a>
 
 </p>
